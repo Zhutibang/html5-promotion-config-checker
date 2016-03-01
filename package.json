@@ -1,0 +1,19 @@
+{
+  "name": "html5-promotion-config-checker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zhutibang/html5-promotion-config-checker.git"
+  },
+  "author": "Jayin Ton",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Zhutibang/html5-promotion-config-checker/issues"
+  },
+  "homepage": "https://github.com/Zhutibang/html5-promotion-config-checker#readme"
+}
