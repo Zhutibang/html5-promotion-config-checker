@@ -15,7 +15,7 @@ function checkConfigJSON (project_root, project_name, config) {
   files.forEach(function (file) {
     if (!fs.existsSync(path.join(project_root, file))) {
       // console.log(path.join(project_root, file))
-      console.log('Project:%s [config.json] 没找到: %s', project_name,file)
+      console.log('Project:%s [config.json] 没找到: %s', project_name, file)
       process.exit(1)
     }
   })
@@ -53,7 +53,18 @@ function checkInfoJSON (project_root, project_name, config) {
 /**
  * 检测plugin.json
  */
-function checkPluginJSON () {
+function checkPluginJSON (project_root, project_name, config) {
+  config = config.config
+  for (let plugin_config_name in config) {
+    let plugin_config = config[plugin_config_name]
+    plugin_config.files.forEach(function (file) {
+      let need_file = path.join(project_root, file)
+      if (!fs.existsSync(need_file)) {
+        console.log('Project:%s [plugin.json] Plugin 缺少: %s %s', project_name, plugin_config.description, file)
+        process.exit(1)
+      }
+    })
+  }
 }
 
 module.exports = {
