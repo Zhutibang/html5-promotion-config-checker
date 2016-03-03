@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require('path')
 
 /**
- * 检测
+ * 检测config.json
  * @param {string} project_root 该项目的根目录    
  */
 function checkConfigJSON (project_root, project_name, config) {
@@ -20,7 +20,9 @@ function checkConfigJSON (project_root, project_name, config) {
     }
   })
 }
-
+/**
+ * 检测game_info.json
+ */
 function checkInfoJSON (project_root, project_name, config) {
   for (let page_config_index in config) { // 遍历每一页
     let page_config = config[page_config_index]
@@ -48,7 +50,9 @@ function checkInfoJSON (project_root, project_name, config) {
     }
   }
 }
-
+/**
+ * 检测plugin.json
+ */
 function checkPluginJSON () {
 }
 
