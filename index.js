@@ -52,11 +52,14 @@ function checkInfoJSON (project_root, project_name, config) {
 }
 /**
  * 检测plugin.json
+ * @param {string} project_root description
+ * @param {string} project_name description
+ * @param {ojbect} config object of plugin.json
  */
 function checkPluginJSON (project_root, project_name, config) {
-  config = config.config
-  for (let plugin_config_name in config) {
-    let plugin_config = config[plugin_config_name]
+  let plugin_config_names = config.plugins
+  for (let index in plugin_config_names) {
+    let plugin_config = config.config[plugin_config_names[index]]
     plugin_config.files.forEach(function (file) {
       let need_file = path.join(project_root, file)
       if (!fs.existsSync(need_file)) {

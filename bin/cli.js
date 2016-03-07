@@ -5,6 +5,7 @@
 const path = require('path')
 const checker = require('../')
 const fs = require('fs')
+const pkg = require('../package.json')
 
 let a = `
 $ html5-promotion-checker ./Project
@@ -29,11 +30,15 @@ function work (projects_root, project_name) {
   let project_root = path.join(projects_root, project_name)
   let config = JSON.parse(fs.readFileSync(path.join(projects_root, project_name, '.html5/config.json'), {encoding: 'utf-8'}))
   let info = JSON.parse(fs.readFileSync(path.join(projects_root, project_name, '.html5/game_info.json'), {encoding: 'utf-8'}))
+  let plugin_config = JSON.parse(fs.readFileSync(path.join(projects_root, project_name, '.html5/plugin.json'), {encoding: 'utf-8'}))
 
   checker.checkConfigJSON(project_root, project_name, config)
 
   checker.checkInfoJSON(project_root, project_name, info)
   
+  checker.checkPluginJSON(project_root, project_name, plugin_config)
+  
 }
 
-console.log('all is ok!')
+console.log('All are OK! v'+pkg.version)
+
