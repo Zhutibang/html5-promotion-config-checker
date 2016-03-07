@@ -7,10 +7,6 @@ const checker = require('../')
 const fs = require('fs')
 const pkg = require('../package.json')
 
-let a = `
-$ html5-promotion-checker ./Project
-`
-
 if (process.argv.length < 3) {
   console.log('缺少参数!')
   process.exit(1)
