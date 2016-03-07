@@ -24,6 +24,7 @@ function checkConfigJSON (project_root, project_name, config) {
  * 检测game_info.json
  */
 function checkInfoJSON (project_root, project_name, config) {
+  //检测替换文件是否正确填写
   for (let page_config_index in config) { // 遍历每一页
     let page_config = config[page_config_index]
     // 检测images
@@ -47,7 +48,7 @@ function checkInfoJSON (project_root, project_name, config) {
           }
         })
       })
-    }
+    } 
   }
 }
 /**
@@ -70,8 +71,24 @@ function checkPluginJSON (project_root, project_name, config) {
   }
 }
 
+/**
+ * config.json/game_info.json 联合检测 #5 
+ * see: https://github.com/Zhutibang/html5-promotion-config-checker/issues/5
+ */
+function checkConfigAndInfo(project_root, project_name, config, info){
+  if(config.edit_page){
+    config.edit_page.forEach(function(page){
+      if(!info[page.id]){
+         console.log('Project:%s [config.json+game_info.json] 缺少edit_page: id=%s', project_name, page.id)
+         process.exit(1)
+      }
+    })
+  }
+}
+
 module.exports = {
   checkConfigJSON: checkConfigJSON,
   checkInfoJSON: checkInfoJSON,
-  checkPluginJSON: checkPluginJSON
+  checkPluginJSON: checkPluginJSON,
+  checkConfigAndInfo: checkConfigAndInfo
 }
