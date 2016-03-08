@@ -65,8 +65,15 @@ function checkPluginJSON (project_root, project_name, config) {
         console.log('Project:%s [plugin.json] Plugin 缺少: %s %s', project_name, plugin_config.description, file)
         process.exit(1)
       }
+      //检测所在的模板是否有标签（仅作提示 ，不作为错误处理）
+      let content = fs.readFileSync(need_file, {encoding: 'utf-8'})
+      if(content.indexOf(plugin_config['regex']) === -1){
+        console.log('Project:%s [plugin.json] Plugin 缺少标签: %s %s', project_name, plugin_config.regex, file)
+      }
     })
+    
   }
+  
 }
 
 /**

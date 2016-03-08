@@ -1,6 +1,6 @@
 {
   "name": "html5-promotion-config-checker",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "It's just a tool that only use by Zhutibang.inc. 🐔",
   "main": "index.js",
   "scripts": {
