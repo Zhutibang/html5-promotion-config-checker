@@ -7,7 +7,7 @@ const path = require('path')
  * 检测config.json
  * @param {string} project_root 该项目的根目录    
  */
-function checkConfigJSON (project_root, project_name, config) {
+function checkConfigJSON(project_root, project_name, config) {
   let files = []
   config.edit_page.forEach(page => files.push(page.page))
   files.push(config.preview_file)
@@ -21,7 +21,7 @@ function checkConfigJSON (project_root, project_name, config) {
 /**
  * 检测game_info.json
  */
-function checkInfoJSON (project_root, project_name, config) {
+function checkInfoJSON(project_root, project_name, config) {
   //检测替换文件是否正确填写
   for (let page_config_index in config) { // 遍历每一页
     let page_config = config[page_config_index]
@@ -46,7 +46,7 @@ function checkInfoJSON (project_root, project_name, config) {
           }
         })
       })
-    } 
+    }
   }
 }
 /**
@@ -55,7 +55,7 @@ function checkInfoJSON (project_root, project_name, config) {
  * @param {string} project_name description
  * @param {ojbect} config object of plugin.json
  */
-function checkPluginJSON (project_root, project_name, config) {
+function checkPluginJSON(project_root, project_name, config) {
   let plugin_config_names = config.plugins
   for (let index in plugin_config_names) {
     let plugin_config = config.config[plugin_config_names[index]]
@@ -66,26 +66,26 @@ function checkPluginJSON (project_root, project_name, config) {
         process.exit(1)
       }
       //检测所在的模板是否有标签（仅作提示 ，不作为错误处理）
-      let content = fs.readFileSync(need_file, {encoding: 'utf-8'})
-      if(content.indexOf(plugin_config['regex']) === -1){
+      let content = fs.readFileSync(need_file, { encoding: 'utf-8' })
+      if (content.indexOf(plugin_config['regex']) === -1) {
         console.log('Project:%s [plugin.json] Plugin 缺少标签: %s %s', project_name, plugin_config.regex, file)
       }
     })
-    
+
   }
-  
+
 }
 
 /**
  * config.json/game_info.json 联合检测 #5 
  * see: https://github.com/Zhutibang/html5-promotion-config-checker/issues/5
  */
-function checkConfigAndInfo(project_root, project_name, config, info){
-  if(config.edit_page){
+function checkConfigAndInfo(project_root, project_name, config, info) {
+  if (config.edit_page) {
     config.edit_page.forEach(page => {
-       if(!info[page.id]){
-         console.log('Project:%s [config.json+game_info.json] 缺少edit_page: id=%s', project_name, page.id)
-         process.exit(1)
+      if (!info[page.id]) {
+        console.log('Project:%s [config.json+game_info.json] 缺少edit_page: id=%s', project_name, page.id)
+        process.exit(1)
       }
     })
   }
