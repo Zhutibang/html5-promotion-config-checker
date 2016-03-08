@@ -12,6 +12,7 @@ function checkConfigJSON (project_root, project_name, config) {
   config.edit_page.forEach(function (page) {
     files.push(page.page)
   })
+  files.push(config.preview_file)
   files.forEach(function (file) {
     if (!fs.existsSync(path.join(project_root, file))) {
       // console.log(path.join(project_root, file))
