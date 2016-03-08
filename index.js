@@ -9,13 +9,10 @@ const path = require('path')
  */
 function checkConfigJSON (project_root, project_name, config) {
   let files = []
-  config.edit_page.forEach(function (page) {
-    files.push(page.page)
-  })
+  config.edit_page.forEach(page => files.push(page.page))
   files.push(config.preview_file)
-  files.forEach(function (file) {
+  files.forEach(file => {
     if (!fs.existsSync(path.join(project_root, file))) {
-      // console.log(path.join(project_root, file))
       console.log('Project:%s [config.json] 没找到: %s', project_name, file)
       process.exit(1)
     }
@@ -30,7 +27,7 @@ function checkInfoJSON (project_root, project_name, config) {
     let page_config = config[page_config_index]
     // 检测images
     if (page_config.images) {
-      page_config.images.forEach(function (image_config) {
+      page_config.images.forEach(image_config => {
         let need_file = path.join(project_root, image_config.path, image_config.file_name + '.' + image_config.file_ext)
         if (!fs.existsSync(need_file)) {
           console.log('Project:%s [game_info.json] Image 缺少:%s %s', project_name, image_config.info, image_config.file_name + '.' + image_config.file_ext)
@@ -40,8 +37,8 @@ function checkInfoJSON (project_root, project_name, config) {
     }
     // 检测texts
     if (page_config.texts) {
-      page_config.texts.forEach(function (text_config) {
-        text_config.files.forEach(function (file, index) {
+      page_config.texts.forEach(text_config => {
+        text_config.files.forEach((file, index) => {
           let need_file = path.join(project_root, file)
           if (!fs.existsSync(need_file)) {
             console.log('Project:%s [game_info.json] Text 缺少: %s %s', project_name, text_config.name, file)
@@ -62,7 +59,7 @@ function checkPluginJSON (project_root, project_name, config) {
   let plugin_config_names = config.plugins
   for (let index in plugin_config_names) {
     let plugin_config = config.config[plugin_config_names[index]]
-    plugin_config.files.forEach(function (file) {
+    plugin_config.files.forEach(file => {
       let need_file = path.join(project_root, file)
       if (!fs.existsSync(need_file)) {
         console.log('Project:%s [plugin.json] Plugin 缺少: %s %s', project_name, plugin_config.description, file)
@@ -78,8 +75,8 @@ function checkPluginJSON (project_root, project_name, config) {
  */
 function checkConfigAndInfo(project_root, project_name, config, info){
   if(config.edit_page){
-    config.edit_page.forEach(function(page){
-      if(!info[page.id]){
+    config.edit_page.forEach(page => {
+       if(!info[page.id]){
          console.log('Project:%s [config.json+game_info.json] 缺少edit_page: id=%s', project_name, page.id)
          process.exit(1)
       }

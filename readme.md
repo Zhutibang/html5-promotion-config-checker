@@ -1,5 +1,8 @@
 ## checker🐔
 
+### Requirement
+- Node.js 5+
+
 ```
 # install
 $ git clone xxxx
